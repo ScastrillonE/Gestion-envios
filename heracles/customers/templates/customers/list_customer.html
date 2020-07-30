@@ -1,0 +1,28 @@
+{% extends 'core/base/base.html' %}
+{%load static%}
+{% block content %}
+<table id="dataTable" class="table">
+    <a href="{% url 'create_customer' %}" class="btn btn-success mb-3"><i class="fas fa-plus" ></i> Añadir cliente</a>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Tipo documento</th>
+        <th>Documento</th>
+        <th>Direccion</th>
+        <th>Departamento</th>
+        <th>Municipio</th>
+        <th>Telefono</th>
+        <th>Celular</th>
+        <th>Email</th>
+        <th>Opciones</th>
+    </tr>
+    </thead>
+</table>
+
+{%endblock%}
+
+{%block extra_js%}
+<script src="{% static 'js/functions.js' %}"></script>
+
+{%endblock%}

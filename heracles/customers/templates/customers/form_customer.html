@@ -1,0 +1,82 @@
+{% extends 'core/base/base.html' %}
+{% load static %}
+{%block extra_css%}
+<!--select2-->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet"/>
+{%endblock%}
+
+{% block content %}
+<!-- general form elements disabled -->
+<div class="card card-warning">
+    <div class="card-header">
+        <h3 class="card-title">{{title}} {{obj.name}}</h3>
+    </div>
+    {% if form.errors %}
+    <!-- Error messaging -->
+    <div id="card">
+        <div class="card-body bg-red">
+            {{ form.non_field_errors }}
+            <ul>
+                {% for field in form %}
+                {% if field.errors %}
+                <li>{{ field.label }}: {{ field.errors|striptags }}</li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <!-- /Error messaging -->
+    {% endif %}
+    <!-- /.card-header -->
+    <div class="card-body">
+        <form method="post">
+            {%csrf_token%}
+            <div class="row">
+                {{form}}
+            </div>
+
+            <button type="submit" class="btn btn-warning btn-lg mt-1">{{title_button}}</button>
+            <a href="{% url 'list_customer' %}" type="button" class="btn btn-secondary btn-lg mt-1">Cancelar</a>
+        </form>
+
+
+    </div>
+    <!-- /.card-body -->
+
+</div>
+<!-- /.card -->
+{%endblock%}
+
+{%block extra_js%}
+
+<script src="{% static 'js/functions.js' %}"></script>
+<!--select2-->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    $('select[name="department"]').select2();
+    $('select[name="municipio"]').select2();
+    var municipios = $('select[name="municipio"]');
+
+    $('select[name="department"]').on('change',function(){
+        var id = $(this).val();
+        $.ajax({
+            url:window.location.pathname,
+            type:'POST',
+            data:{
+                'action':'search_mun',
+                'id':id,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            dataType:'json',
+        }).done(function(data){
+            console.log(data);
+            municipios.html(' ').select2({
+                data:data
+            });
+        });
+    });
+});
+</script>
+{%endblock%}

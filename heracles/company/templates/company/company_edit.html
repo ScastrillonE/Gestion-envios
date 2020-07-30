@@ -1,0 +1,11 @@
+{% extends 'core/base/base.html'%}
+
+{%block content%}
+<form method="post" enctype="multipart/form-data">
+    {%csrf_token%}
+    {{form}}
+    <div class="row">
+        <button type="submit" class="btn btn-success btn-block mt-3">Guardar</button>
+    </div>
+</form>
+{%endblock%}

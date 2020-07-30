@@ -1,0 +1,20 @@
+{%extends 'core/base/base.html' %}
+
+{%block content%}
+<form method="POST">
+    {%csrf_token%}
+    <div class="card bg-danger">
+        <div class="car-header"></div>
+        <div class="card-body text-center">
+            <p>¿Esta seguro que desea eliminar el cliente <strong>{{obj.name}}</strong> ?</p>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn brn-danger btn-lg btn-block" style="color:#FFF;">Eliminar</button>
+        </div>
+        <a href="{%url 'list_customer' %}" class="btn btn-warning btn-lg btn-block" style="color:#FFF;">Cancelar</a>
+
+    </div>
+</form>
+
+
+{%endblock%}

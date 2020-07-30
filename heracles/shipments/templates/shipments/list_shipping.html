@@ -1,0 +1,121 @@
+{% extends 'core/base/base.html' %}
+{%load static%}
+{% block extra_css %}
+<!--datetimepicker-->
+<link rel="stylesheet" href="{% static 'lib/bootstrap-datetimepicker/css/bootstrap-datepicker.standalone.css'%} ">
+
+{%endblock%}
+{% block content %}
+<div class="card-body">
+    <div class="col-md-12 row">
+        <div class="col-md-4">
+            Desde:
+            <input type="text" name="f1" id="f1" class="form-class" readonly>
+        </div>
+        <div class="col-md-4">
+            Hasta:
+            <input type="text" name="f2" id="f2" class="form-class" readonly>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-warning" id="report">Generar reporte</button>
+        </div>
+    </div>
+</div>
+<div class="card-body">
+    <div class="row">
+        <a href="{% url 'create_shipping' %}" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Agregar nuevo
+            envío</a>
+    </div>
+</div>
+<table id="tableShipping" class="table">
+
+    <thead>
+    <tr>
+        <th>Cliente</th>
+        <th>T.Documento</th>
+        <th>Documento</th>
+        <th>N.Guia</th>
+        <th>Direccion</th>
+        <th>Departamento</th>
+        <th>Municipio</th>
+        <th>Telefono</th>
+        <th>Celular</th>
+        <th>Empresa</th>
+        <th>Foto</th>
+        <th>Opciones</th>
+    </tr>
+    </thead>
+</table>
+
+<!--Modal for list extra data -->
+<div class="modal" id="extraTable" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="title"><font style="vertical-align: inherit;"><font
+                        style="vertical-align: inherit;">Info envio</font></font></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"><font style="vertical-align: inherit;"><font
+                        style="vertical-align: inherit;">×</font></font></span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <table id="" class="table">
+
+                    <thead>
+                    <tr>
+                        <th>Fecha de envio</th>
+                        <th>Estado</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr id="datosextra">
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock%}
+
+{%block extra_js%}
+<script src="{% static 'js/functions.js' %}"></script>
+<!--datetimepicker-->
+<script src="{% static 'lib/bootstrap-datetimepicker/js/bootstrap-datepicker.min.js' %}" ></script>
+<script>
+$(document).ready(function(){
+    $("#f1,#f2").datepicker({
+        language: "es",
+        todayBtn: "linked",
+        format: "yyyy-mm-dd",
+        todayHighlight: true,
+    });
+
+    $("#report").on('click', function (e){
+        e.preventDefault();
+        var f1,f2;
+        f1 = $("#f1").val();
+        f2 = $("#f2").val();
+
+        if(f1=="" || f1 == null){
+            var d = new Date();
+            var f1 = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
+
+        }
+        if(f2=="" || f2 == null){
+            var d = new Date();
+            var f2 = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
+        }
+        var url = "/reporte/"+ f1 + "/" + f2;
+        window.open(url);
+    });
+});
+
+
+</script>
+
+{%endblock%}

@@ -1,0 +1,252 @@
+{%extends 'core/base/base.html' %}
+{%load static%}
+{% block extra_css %}
+<!--CDN Select2-->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet"/>
+<!--datetimepicker-->
+<link rel="stylesheet" href="{% static 'lib/bootstrap-datetimepicker/css/bootstrap-datepicker.standalone.css'%} ">
+{%endblock%}
+{%block content %}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 ">
+                <img id="preview" class="img-fluid img-thumbnail" style="max-width: 100%; height: 320px;" src="">
+            </div>
+            <div class="col-lg-8">
+                <div class="card callout {%if form.status.value == 'Bodega' %} callout-warning {%else%} callout-success  {%endif%} ">
+                    <form method="POST" id="form-shipping">
+
+                        <div class="card-body">
+                            {% csrf_token%}
+                            <input type="hidden" id="customer_name" name="customer_name">
+                            <input type="hidden" name="action" id="action" {% if action == 'edit' %} value="edit_shipping" {%else%} value="create_shipping" {%endif%}>
+                            {{form.photo}}
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        Cliente
+                                        {{form.customer}}
+                                    </div>
+                                    <div class="col-lg-4">
+                                        Numero de guia
+                                        {{form.shipping_number}}
+                                    </div>
+                                    <div class="col-lg-3">
+                                        Peso:
+                                        {{form.weight}}
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            Correo electronico
+                                            {{form.c_email}}
+                                        </div>
+                                        <div class="col-lg-4">
+                                            Tipo de documento
+                                            {{form.c_Tdocument}}
+                                        </div>
+                                        <div class="col-lg-3">
+                                            Documento:
+                                            {{form.c_document}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            Departamento:
+                                            {{form.c_department}}
+                                        </div>
+                                        <div class="col-lg-4">
+                                            Municipio:
+                                            {{form.c_municipio}}
+                                        </div>
+                                        <div class="col-lg-3">
+                                            Direccion:
+                                            {{form.c_address}}
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            Telefono:
+                                            {{form.c_phone}}
+                                        </div>
+                                        <div class="col-lg-4">
+                                            celular:
+                                            {{form.c_cel}}
+                                        </div>
+                                        <div class="col-lg-3">
+                                            Empresa de envio:
+                                            {{form.shipping_company}}
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            Fecha salida
+                                            {{form.send_date}}
+
+                                        </div>
+                                        <div class="col-lg-4">
+                                            Estado de envio:
+                                            {{form.status}}
+                                        </div>
+                                        <div class="col-lg-4">
+                                            Observaciones:
+                                            {{form.observations}}
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <a id="openmodal" class="btn btn-primary mt-4">Tomar foto</a>
+
+                                <button id="btn-create" type="submit" class="btn btn-success mt-4">Guardar</button>
+                                {% if action == 'edit' %}
+                                <a href="{% url 'create_pdf' id_ship %}" class="btn btn-warning mt-4">Imprimir</a>
+                                {%else%}
+                                <a id="limpiar" class="btn btn-warning mt-4">Limpiar</a>
+                                {%endif%}
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12"></div>
+<!--Modal for take photo-->
+<div class="modal" id="ventanaCapture" tabindex="-1" role="dialog" aria-labelledby="tituloVentana" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tituloVentana"><font style="vertical-align: inherit;"><font
+                        style="vertical-align: inherit;">Tomar foto</font></font></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"><font style="vertical-align: inherit;"><font
+                        style="vertical-align: inherit;">×</font></font></span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <video id="player" autoplay class="col"></video>
+                <button id="capture" class="btn btn-success btn-block">Capturar</button>
+                <canvas id="snapshot" width=321 height=240 class="col mt-2"></canvas>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><font
+                        style="vertical-align: inherit;"><font
+                        style="vertical-align: inherit;">Guardar</font></font></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock%}
+
+{%block extra_js%}
+<script src="{% static 'js/functions.js' %}"></script>
+
+<!--CDN Select2-->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+<!--datetimepicker-->
+<script src="{% static 'lib/bootstrap-datetimepicker/js/bootstrap-datepicker.min.js' %}"></script>
+<script src="{% static 'lib/bootstrap-datetimepicker/localebootstrap-datepicker.es.min.js' %}"></script>
+<script>
+    $(document).ready(function(){
+
+        $("#id_customer").select2();
+        $("#id_c_department").select2();
+        $("#id_c_municipio").select2();
+        $("#id_send_date").attr("readonly","readonly");
+        console.log($("#id_status").val());
+        $("#id_send_date").datepicker({
+            language: "es",
+            todayBtn: "linked",
+            todayHighlight: true,
+            format: "yyyy-mm-dd",
+        });
+
+        {%if action == 'edit'%}
+            var img = $("#id_photo").val();
+            var preview = document.getElementById('preview');
+            preview.src = img;
+        {%endif%}
+
+
+        $("#btn-create").on("click",function(e) {
+            e.preventDefault();
+            var data = $("#form-shipping").serialize();
+            $.ajax({
+                url: window.location.pathname,
+                type: "POST",
+                dataType:"json",
+                data: data,
+            }).done(function(data){
+                console.log(data);
+                if (!data.hasOwnProperty('error')) {
+                    $.alert({
+                        title: data['success'],
+                        content: '',
+                    });
+                    return false;
+                }
+                $.alert({
+                    title: data['error'],
+                    content: '',
+                });
+                {%if action != 'edit'%}
+                 clearFields();
+                {%endif%}
+            }).fail(function(){
+                $.alert({
+                   title: 'Ocurrio un error al guardar',
+                   content: '',
+                });
+            });
+        });
+        autocomplete_customer();
+        takePhoto();
+
+        $("#openmodal").on("click",function(){
+            $('#ventanaCapture').modal('show');
+        });
+    });
+
+$("#limpiar").on("click",function() {
+    clearFields();
+});
+
+
+
+function clearFields(){
+   $("#id_customer").val('');
+   $("#id_send_date").val('');
+   $("#id_status").val('Bodega');
+   $("#select2-id_customer-container").text("");
+   $("#id_c_Tdocument").val('');
+   $("#id_c_document").val('');
+   $("#id_c_address").val('');
+   $("#id_c_phone").val('');
+   $("#id_c_cel").val('');
+   $("#id_shipping_company").val('');
+   $("#id_photo").val('');
+   $("#preview").removeAttr('src');
+}
+
+
+
+</script>
+{%endblock%}

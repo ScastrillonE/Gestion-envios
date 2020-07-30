@@ -1,0 +1,50 @@
+<!--<div class="card">-->
+<!--    <div class="card-header">-->
+<!--        <div class="col-lg-12 row">-->
+<!--            <div class="mx-auto" style="width: 100px;">-->
+<!--                <h3>Notas</h3>-->
+<!--            </div>-->
+<!--            <div class="btn btn-success" id="create_note">-->
+<!--                <i class="fas fa-plus"></i>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="card-body" id="notes">-->
+<!--        {%for note in notes%}-->
+<!--        <div class="row">-->
+<!--            <a href="" onclick="edit_note({{note.id}})"><h5 class="mb-3 ml-5"><i-->
+<!--                    class="fas fa-hand-point-right mr-5"></i> {{note.title}} {% if note.status%}-->
+<!--                <span class="badge badge-success">Hecho</span> {%else%} <span-->
+<!--                        class="badge badge-warning">Pendiente</span>{%endif%}-->
+<!--            </h5></a>-->
+<!--        </div>-->
+<!--        &lt;!&ndash;        <h5 class="mb-3 ml-5"><i class="fas fa-hand-point-right mr-5"></i> Lorem ipsum dolor sit amet <span&ndash;&gt;-->
+<!--        &lt;!&ndash;                class="badge badge-success">Hecho</span></h5>&ndash;&gt;-->
+<!--        <hr>-->
+<!--        {%endfor%}-->
+<!--        <div class="mx-auto" style="width: 200px;">-->
+<!--            <nav aria-label="Page navigation example">-->
+<!--                <ul class="pagination">-->
+<!--                    {%if notes.has_previous%}-->
+<!--                    <li class="page-item">-->
+<!--                        <a class="page-link" href="?page={{notes.previous_page_number}}" aria-label="Previous">-->
+<!--                            <span aria-hidden="true">&laquo;</span>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    {%endif%}-->
+<!--                    {%for number in notes.paginator.page_range%}-->
+<!--                    <li class="page-item"><a class="page-link" href="?page={{number}}">{{number}}</a></li>-->
+<!--                    {%endfor%}-->
+<!--                    {%if notes.has_next%}-->
+<!--                    <li class="page-item">-->
+<!--                        <a class="page-link" href="?page={{notes.next_page_number}}" aria-label="Next">-->
+<!--                            <span aria-hidden="true">&raquo;</span>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    {%endif%}-->
+<!--                </ul>-->
+<!--            </nav>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>

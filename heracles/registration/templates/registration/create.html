@@ -1,0 +1,111 @@
+{% extends 'core/base/base.html' %}
+{% load static %}
+
+{%block content%}
+{% if form.errors %}
+<!-- Error messaging -->
+
+<div class="alert alert-danger">
+    {{ form.non_field_errors }}
+    <ul>
+        {% for field in form %}
+        {% if field.errors %}
+        <li>{{ field.label }}: {{ field.errors|striptags }}</li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+<!-- /Error messaging -->
+{% endif %}
+<form method="POST">
+    {%csrf_token%}
+    <div class="card">
+        <div class="card-body">
+            <h4 class="text-center">Registrar un nuevo empleado</h4>
+            <hr>
+            <div class="col-lg-12 row">
+                <div class="col-lg-6">
+                    <div class="input-group mb-3">
+                        {{form.first_name}}
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-address-book"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-3">
+                        {{form.last_name}}
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-book"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 row">
+                <div class="col-lg-6">
+                    <div class="input-group mb-3">
+                        {{form.email}}
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope-open"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="input-group mb-3">
+                        {{form.password1}}
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="input-group mb-3">
+                        {{form.password2}}
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-12 row">
+                <div class="col-lg-6">
+                    <div class="input-group mb-3">
+                        {{form.username}}
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group mb-3">
+                        {{form.groups}}
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-layer-group"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success btn-block">Registrar empleado</button>
+        </div>
+        <p class="mb-1 text-center">
+            <a href="{% url 'password_reset' %}">¿Olvido su contraseña?</a>
+        </p>
+    </div>
+</form>
+{%endblock %}<!-- /.login-box -->

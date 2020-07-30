@@ -1,0 +1,89 @@
+
+<style>
+@font-face {
+  font-family: 'truetype';
+  src: URL('/app/static/fonts/free3of9/fre3of9x.ttf') format('truetype');
+}
+#Codebar{
+    font-family: truetype;
+    font-size:68px;
+    text-align:left;
+    padding-bottom:-110px;
+}
+body{
+    color: #222;
+    font-family: arial, verdana, sans-serif;
+    font-size: 10pt;
+    background-color: #fff;
+}
+
+table th {
+  text-align: left;
+  background-color: #e2e2e2;
+}
+
+
+
+
+</style>
+<table>
+</table>
+<table width="70%" cellpadding="1" cellspacing="1">
+    <p id="Codebar" style="margin-left:65px;">{{shipping.shipping_number}}</p>
+</table>
+<table width="70%" cellpadding="2" cellspacing="3">
+    <td style="border: 1px solid #e2e2e2">
+        <b>Numero de guia:</b> {{shipping.shipping_number}}
+    </td>
+</table>
+<table width="70%" cellpadding="3" cellspacing="3">
+    <tbody>
+    <tr>
+        <td style="border: 1px solid #e2e2e2;">
+            <b>De:</b> {{company.name_company}}<br>
+            <b>Tel:</b> {{company.phone_number}}
+            <b>Cel:</b> {{company.cel}}
+            <b>Email:</b> {{company.email}}
+            <b>Direccion:</b> {{company.address}}
+        </td>
+    </tr>
+    <tr>
+
+        <td style="border: 1px solid #e2e2e2">
+            <b>Cliente:</b> {{shipping.customer}} <br>
+            <b>Telefono:</b> {{shipping.c_phone}}
+            <b>Celular:</b> {{shipping.c_cel}}
+            <b>Direccion:</b> {{shipping.c_address}}
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+<table width="70%" cellpadding="3" cellspacing="3">
+    <td style="border: 1px solid #e2e2e2">
+        <b>Observaciones:</b> {{shipping.observations}}
+    </td>
+</table>
+<table width="70%" cellpadding="0" cellspacing="0">
+    <tr>
+        <td style="border: 1px solid #e2e2e2;">
+            <b>Origen:</b>
+            Antioquia - Medellín
+        </td>
+        <td align="center" style="border: 1px solid #e2e2e2;"><img style="height:60px;" src="/app/static/img/inst/Codqr.png" alt=""> <p style="margin:0px;">@nkninoska</p></td>
+        <td style="border: 1px solid #e2e2e2">
+            <b>Destino:</b> {{shipping.c_municipio}}
+        </td>
+    </tr>
+</table><table width="70%" cellpadding="3" cellspacing="3">
+    <tr>
+        <td style="border: 1px solid #e2e2e2;">
+<!--            <img style="height:30px;" src="/app/static/img/facebook/facebook-app-logo.png" alt="">-->
+<!--            <p></p>-->
+        </td>
+        <td align="center" style="border: 1px solid #e2e2e2;"><img style="height:30px;" src="/app/static/img/inst/instagram-logo.png" alt=""></td>
+        <td style="border: 1px solid #e2e2e2;">
+            <p>www.nkninoska.com</p>
+        </td>
+    </tr>
+</table>

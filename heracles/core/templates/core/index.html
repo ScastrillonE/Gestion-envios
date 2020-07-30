@@ -1,0 +1,141 @@
+{% extends 'core/base/base.html' %}
+{% load note_tags%}
+{%block content %}
+<div class="content ">
+    <div class="container-fluid">
+        <div class="row ">
+            <!-- Left col -->
+            <section class="col-lg-5">
+                <div class="col-lg-7 col-6 pt-5">
+                    <!-- small box -->
+                    <div class="small-box bg-primary">
+                        <div class="inner">
+                            <h3>{{clientes}}</h3>
+
+                            <p>Clientes</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <a href="{% url 'list_customer' %}" class="small-box-footer">Mas info <i
+                                class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-6 pt-4">
+                    <!-- small box -->
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{enviados}}</h3>
+
+                            <p>Enviados</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <a href="{% url 'list_shipping' %}" class="small-box-footer">Mas info <i
+                                class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-6 pt-4">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>{{pendientes}}</h3>
+
+                            <p>Pendientes</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <a href="{% url 'list_shipping' %}" class="small-box-footer">Mas info <i
+                                class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- /.card -->
+            </section>
+            <!-- /.Left col -->
+            <!-- right col (We are only adding the ID to make the widgets sortable)-->
+            <section class="col-lg-7 pr-5 pt-5">
+                <img width="100%" src="{{company_data.logo.url}}" alt="">
+            </section>
+            <!-- right col -->
+
+        </div>
+
+    </div>
+</div>
+
+<!--<div class="modal"  id="modal" tabindex="-1" role="dialog">-->
+<!--  <div class="modal-dialog" role="document">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <h5 class="modal-title">Crear nota nueva</h5>-->
+<!--        <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close">-->
+<!--          <span aria-hidden="true" class="close_modal">&times;</span>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--          <form id="form_notes">-->
+<!--              <div>-->
+<!--                  <input type="text" class="form-control" name="title_note">-->
+<!--                  <br>-->
+<!--                  <textarea type="text" class="form-control" name="content_note"></textarea>-->
+<!--                  <input type="checkbox" name="status">-->
+<!--              </div>-->
+<!--          </form>-->
+<!--      </div>-->
+<!--      <div class="modal-footer">-->
+<!--        <a class="btn btn-primary" name="save_note" id="save_note">Guardar nota</a>-->
+<!--        <button type="button" class="btn btn-secondary close_modal" data-dismiss="modal">Close</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+{%endblock%}
+
+{%block extra_js %}
+<script>
+$(document).ready(function(){
+    $("#create_note").on('click', function(){
+        $('#modal').show();
+    });
+    $('.close_modal').on('click', function(){
+        $('#modal').modal('toggle');
+    });
+    setInterval(function() {
+      $('#notes').load(' .card-body'); // Selector de la div y el fichero a refrescar
+    }, 8000);
+
+    $("#save_note").on('click', function(e){
+        e.preventDefault();
+        var data = $("#form_notes").serialize();
+        console.log(data);
+        $.ajax({
+            url:'save/note/',
+            type: 'POST',
+            dataType: 'json',
+            data: data,
+        }).done(function(data){
+            alert("Guardado con exito");
+            $('#modal').modal('toggle');
+
+        });
+    });
+
+    function edit_note(id){
+        console.log(id);
+        $.ajax({
+            url:'save/note/',
+            type: 'GET',
+            dataType: 'json',
+            data: {'id':id},
+        }).done(function(data){
+            alert('funciona');
+        });
+    };
+
+});
+</script>
+{%endblock %}
