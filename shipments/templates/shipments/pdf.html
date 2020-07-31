@@ -1,15 +1,9 @@
-
 <style>
 @font-face {
   font-family: 'truetype';
-  src: URL('/app/static/fonts/free3of9/fre3of9x.ttf') format('truetype');
+  src: URL('/app/static/fonts/barcode/BarcodeFont.ttf') format('truetype');
 }
-#Codebar{
-    font-family: truetype;
-    font-size:68px;
-    text-align:left;
-    padding-bottom:-110px;
-}
+
 body{
     color: #222;
     font-family: arial, verdana, sans-serif;
@@ -23,17 +17,25 @@ table th {
 }
 
 
-
-
 </style>
-<table>
+
+<table width="100%" height="100%">
+    <TR>
+        <TD VALIGN="MIDDLE" ALIGN="CENTER">
+            <p style="font-family: truetype;font-size:70px;padding-bottom:-60px;margin-left:10px;text-align:left;">
+                {{shipping.shipping_number}}</p>
+        </TD>
+        <td>
+            <img style="width:150px;" src="/app/static/img/logo_nk/logo_nk.jpeg" alt="">
+
+        </td>
+    </TR>
 </table>
-<table width="70%" cellpadding="1" cellspacing="1">
-    <p id="Codebar" style="margin-left:65px;">{{shipping.shipping_number}}</p>
-</table>
-<table width="70%" cellpadding="2" cellspacing="3">
+
+<table width="70%" cellpadding="2" cellspacing="3" style="margin-top:8px;">
     <td style="border: 1px solid #e2e2e2">
         <b>Numero de guia:</b> {{shipping.shipping_number}}
+        <b> Empresa de envio: </b> {{shipping.shipping_company.name}}
     </td>
 </table>
 <table width="70%" cellpadding="3" cellspacing="3">
@@ -70,20 +72,25 @@ table th {
             <b>Origen:</b>
             Antioquia - Medellín
         </td>
-        <td align="center" style="border: 1px solid #e2e2e2;"><img style="height:60px;" src="/app/static/img/inst/Codqr.png" alt=""> <p style="margin:0px;">@nkninoska</p></td>
+        <td align="center" style="border: 1px solid #e2e2e2;"><img style="height:60px;"
+                                                                   src="/app/static/img/inst/Codqr.png" alt="">
+            <p style="margin:0px;">@nkninoska</p></td>
         <td style="border: 1px solid #e2e2e2">
             <b>Destino:</b> {{shipping.c_municipio}}
         </td>
     </tr>
-</table><table width="70%" cellpadding="3" cellspacing="3">
+</table>
+<table width="70%" cellpadding="3" cellspacing="3">
     <tr>
         <td style="border: 1px solid #e2e2e2;">
-<!--            <img style="height:30px;" src="/app/static/img/facebook/facebook-app-logo.png" alt="">-->
-<!--            <p></p>-->
+            <img style="height:20px;" src="/app/static/img/facebook/facebook-app-logo.png" alt="">
+            NK Ninoska
         </td>
-        <td align="center" style="border: 1px solid #e2e2e2;"><img style="height:30px;" src="/app/static/img/inst/instagram-logo.png" alt=""></td>
+        <td align="center" style="border: 1px solid #e2e2e2;"><img style="height:20px;"
+                                                                   src="/app/static/img/inst/instagram-logo.png" alt="">
+        </td>
         <td style="border: 1px solid #e2e2e2;">
-            <p>www.nkninoska.com</p>
+            <p style="margin-left:12px;margin-top:8px;">www.nkninoska.com</p>
         </td>
     </tr>
 </table>
