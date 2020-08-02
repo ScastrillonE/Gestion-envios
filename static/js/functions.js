@@ -63,8 +63,7 @@ function listarEnvios(){
             {"data":"c_phone"},
             {"data":"c_cel"},
             {"data":"s_company"},
-            {"data":"send_date"},
-            {"data":"status"},
+
             {
                 data: 'Foto',
                 render: function(data,type,row){
