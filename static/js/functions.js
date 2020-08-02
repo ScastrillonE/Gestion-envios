@@ -25,8 +25,8 @@ function listarClientes(){
             {
                 data: 'options',
                 render: function(data,type,row){
-                        var buttons = '<a href="/customer/update/' + row.id + '/"class="btn btn-warning mr-1"><i class="fas fa-edit"></i></a>';
-                        buttons += '<a href="/customer/delete/' + row.id + '/"class="btn btn-danger"><i class="fas fa-trash"></i></a>';
+                        var buttons = '<a href="/customer/update/' + row.id + '/"class="btn btn-warning mr-1"><i class="icon-pencil"></i></a>';
+                        buttons += '<a href="/customer/delete/' + row.id + '/"class="btn btn-danger"><i class="icon-bin2"></i></a>';
                         return buttons;
                 },
             }
@@ -72,10 +72,10 @@ function listarEnvios(){
             {
                 data: 'options',
                 render: function(data,type,row){
-                        var buttons = '<div class=row>'+'<a href="/shipping/' + row.id + '/"class="btn btn-warning mr-1"><i class="fa fa-pencil"></i></a>';
-                        buttons += '<a href="/shipping/delete/' + row.id + '/"class="btn btn-danger"><i class="fa fa-trash-o"></i></a>'+ '</div>';
-                        buttons += '<div class="row mt-2">'+'<a onclick="extraTable(\''+ row.status +'\' ' + ','+ '\''+ row.send_date +'\')" class="btn btn-success"><i class="fa fa-eye"></i></a>';
-                        buttons += '<a href="/create/pdf/' + row.id + '/"class="btn btn-primary ml-1"><i class="fa fa-print"></i></a>'+'</div>';
+                        var buttons = '<div class=row>'+'<a href="/shipping/' + row.id + '/"class="btn btn-warning mr-1"><i class="icon-pencil"></i></a>';
+                        buttons += '<a href="/shipping/delete/' + row.id + '/"class="btn btn-danger"><i class="icon-bin2"></i></a>'+ '</div>';
+                        buttons += '<div class="row mt-2">'+'<a onclick="extraTable(\''+ row.status +'\' ' + ','+ '\''+ row.send_date +'\')" class="btn btn-success"><i class=" icon-eye"></i></a>';
+                        buttons += '<a href="/create/pdf/' + row.id + '/"class="btn btn-primary ml-1"><i class="icon-printer"></i></a>'+'</div>';
 
                         return buttons;
                 },
