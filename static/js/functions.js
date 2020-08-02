@@ -77,7 +77,7 @@ function listarEnvios(){
                 render: function(data,type,row){
                         var buttons = '<div class=row>'+'<a href="/shipping/' + row.id + '/"class="btn btn-warning mr-1"><i class="fa fa-pencil-square-o"></i></a>';
                         buttons += '<a href="/shipping/delete/' + row.id + '/"class="btn btn-danger"><i class="fa fa-trash-o"></i></a>'+ '</div>';
-                        buttons += '<div class="row mt-2"><i></i></a>';
+//                        buttons += '<div class="row mt-2"><i></i></a>';
                         buttons += '<a href="/create/pdf/' + row.id + '/"class="btn btn-primary ml-1"><i class="fa fa-print"></i></a>'+'</div>';
 
                         return buttons;
