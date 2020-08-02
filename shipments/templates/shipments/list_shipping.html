@@ -31,7 +31,6 @@
 
     <thead>
     <tr>
-        <th>Id</th>
         <th>Cliente</th>
         <th>T.Documento</th>
         <th>Documento</th>
@@ -48,14 +47,45 @@
     </thead>
 </table>
 
+<!--Modal for list extra data -->
+<div class="modal" id="extraTable" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="title"><font style="vertical-align: inherit;"><font
+                        style="vertical-align: inherit;">Info envio</font></font></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"><font style="vertical-align: inherit;"><font
+                        style="vertical-align: inherit;">×</font></font></span>
+                </button>
+            </div>
 
+            <div class="modal-body">
+                <table id="" class="table">
+
+                    <thead>
+                    <tr>
+                        <th>Fecha de envio</th>
+                        <th>Estado</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr id="datosextra">
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 {%endblock%}
 
 {%block extra_js%}
 <script src="{% static 'js/functions.js' %}"></script>
 <!--datetimepicker-->
-<script src="{% static 'lib/bootstrap-datetimepicker/js/bootstrap-datepicker.min.js' %}"></script>
+<script src="{% static 'lib/bootstrap-datetimepicker/js/bootstrap-datepicker.min.js' %}" ></script>
 <script>
 $(document).ready(function(){
     $("#f1,#f2").datepicker({
@@ -84,7 +114,6 @@ $(document).ready(function(){
         window.open(url);
     });
 });
-
 
 
 </script>
