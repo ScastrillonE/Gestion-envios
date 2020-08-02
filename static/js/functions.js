@@ -92,11 +92,6 @@ function listarEnvios(){
     });
 }
 
-function extraTable(status, date) {
-    $('#extraTable').modal('show');
-    $('#datosextra').html("<td>" +  date + "</td>" + "<td>"+status+"</td>");
-
-}
 //function addCustomer () {
 //        $.confirm({
 //            theme: 'modern',
