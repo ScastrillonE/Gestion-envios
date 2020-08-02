@@ -31,7 +31,8 @@ def reportes(request, f1, f2):
         ws['F2'] = 'Celular'
         ws['G2'] = 'Empresa de envio'
         ws['H2'] = 'Fecha de envio'
-        ws['I2'] = 'Estado'
+        ws['I2'] = 'Numero de guia'
+        ws['J2'] = 'Estado'
 
         cont = 3
 
@@ -44,12 +45,13 @@ def reportes(request, f1, f2):
             ws.cell(row=cont, column=6).value = envio.c_cel
             ws.cell(row=cont, column=7).value = envio.get_company
             ws.cell(row=cont, column=8).value = envio.send_date
-            ws.cell(row=cont, column=9).value = envio.status
+            ws.cell(row=cont, column=9).value = envio.shipping_number
+            ws.cell(row=cont, column=10).value = envio.status
             cont += 1
 
         nombre = 'Reporte envios.xlsx'
         response = HttpResponse(content_type="application/ms-excel")
-        content = "attachment; filename = {}".format(nombre)
+        content = "attachment; filename = reportes-envios.xlsx"
         response['Content-Disposition'] = content
         wb.save(response)
         return response

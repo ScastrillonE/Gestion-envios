@@ -1,7 +1,7 @@
 <style>
 @font-face {
   font-family: 'truetype';
-  src: URL('/app/static/fonts/barcode/BarcodeFont.ttf') format('truetype');
+  src: URL('/app/static/fonts/barcode/EAN-13.ttf') format('truetype');
 }
 
 body{
@@ -9,6 +9,7 @@ body{
     font-family: arial, verdana, sans-serif;
     font-size: 10pt;
     background-color: #fff;
+
 }
 
 table th {
@@ -21,9 +22,9 @@ table th {
 
 <table width="100%" height="100%">
     <TR>
-        <TD VALIGN="MIDDLE" ALIGN="CENTER">
-            <p style="font-family: truetype;font-size:70px;padding-bottom:-60px;margin-left:10px;text-align:left;">
-                {{shipping.shipping_number}}</p>
+        <TD VALIGN="middle" ALIGN="center">
+            <p style="font-family: truetype;font-size:50px;padding-top:50px;padding-bottom:-70px;margin-left:15px;text-align:left;">
+                {{shipping.id}}</p>
         </TD>
         <td>
             <img style="width:150px;" src="/app/static/img/logo_nk/logo_nk.jpeg" alt="">
@@ -32,9 +33,10 @@ table th {
     </TR>
 </table>
 
-<table width="70%" cellpadding="2" cellspacing="3" style="margin-top:8px;">
+<table width="70%" cellpadding="2" cellspacing="3" style="margin-top:-10px;">
     <td style="border: 1px solid #e2e2e2">
-        <b>Numero de guia:</b> {{shipping.shipping_number}}
+        <b>Numero consecutivo: </b> {{shipping.id}} |
+        <b>Numero de guia:</b> {{shipping.shipping_number}} |
         <b> Empresa de envio: </b> {{shipping.shipping_company.name}}
     </td>
 </table>
@@ -43,10 +45,12 @@ table th {
     <tr>
         <td style="border: 1px solid #e2e2e2;">
             <b>De:</b> {{company.name_company}}<br>
+            <b>Direccion:</b> {{company.address}}
+            <b>Email:</b> {{company.email}}
             <b>Tel:</b> {{company.phone_number}}
             <b>Cel:</b> {{company.cel}}
-            <b>Email:</b> {{company.email}}
-            <b>Direccion:</b> {{company.address}}
+
+
         </td>
     </tr>
     <tr>

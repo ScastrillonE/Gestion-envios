@@ -127,13 +127,14 @@ def shipping(request, id_ship=None):
 
                 if form.is_valid():
                     form.save()
-                    if estado_envio == 'Enviado':
-                        send_email(name, email, number, shipping_company.name, send_date)
-                        print('Enviado')
+                    try:
+                        if estado_envio == 'Enviado':
+                            send_email(name, email, number, shipping_company.name, send_date)
+                            print('Enviado')
 
-                    data['success'] = 'Guardado correctamente'
-                else:
-                    data['error'] = 'Ha ocurrido un error al guardar'
+                        data['success'] = 'Guardado correctamente'
+                    except Exception as e:
+                        data['error'] = str(e)
 
 
             elif action == "edit_shipping":
@@ -150,12 +151,14 @@ def shipping(request, id_ship=None):
 
                 if form.is_valid():
                     form.save()
-                    if estado_envio == 'Enviado':
-                        send_email(name, email, number, shipping_company.name, send_date)
-                        print('Enviado')
-                    data['success'] = 'Editado correctamente'
-                else:
-                    data['error'] = 'Ha ocurrido un error al editar'
+                    try:
+                        if estado_envio == 'Enviado':
+                            send_email(name, email, number, shipping_company.name, send_date)
+                            print('Enviado')
+
+                        data['success'] = 'Guardado correctamente'
+                    except Exception as e:
+                        data['error'] = str(e)
 
             return JsonResponse(data, safe=False)
 

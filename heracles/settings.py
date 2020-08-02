@@ -130,7 +130,7 @@ LOGOUT_REDIRECT_URL = 'login'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'santiagocastrillon.ep@gmail.com'
-EMAIL_HOST_PASSWORD = 'S@ntiyju@n2*05'
+EMAIL_HOST_USER = 'correo@gmail.com'
+EMAIL_HOST_PASSWORD = '****'
 EMAIL_PORT = 587
 

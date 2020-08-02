@@ -25,8 +25,8 @@ function listarClientes(){
             {
                 data: 'options',
                 render: function(data,type,row){
-                        var buttons = '<a href="/customer/update/' + row.id + '/"class="btn btn-warning mr-1"><i class="fa fa-edit"></i></a>';
-                        buttons += '<a href="/customer/delete/' + row.id + '/"class="btn btn-danger"><i class="fa fa-trash"></i></a>';
+                        var buttons = '<a href="/customer/update/' + row.id + '/"class="btn btn-warning mr-1"><i class="fa fa-pencil"></i></a>';
+                        buttons += '<a href="/customer/delete/' + row.id + '/"class="btn btn-danger"><i class="fa fa-trash-o"></i></a>';
                         return buttons;
                 },
             }
@@ -52,6 +52,7 @@ function listarEnvios(){
             dataSrc:"",
         },
         columns : [
+            {"data":"id"},
             {"data":"cust.name"},
             {"data":"c_Tdocument"},
             {"data":"c_document"},
@@ -62,6 +63,8 @@ function listarEnvios(){
             {"data":"c_phone"},
             {"data":"c_cel"},
             {"data":"s_company"},
+            {"data":"send_date"},
+            {"data":"status"},
             {
                 data: 'Foto',
                 render: function(data,type,row){
@@ -72,9 +75,9 @@ function listarEnvios(){
             {
                 data: 'options',
                 render: function(data,type,row){
-                        var buttons = '<div class=row>'+'<a href="/shipping/' + row.id + '/"class="btn btn-warning mr-1"><i class="fa fa-edit"></i></a>';
-                        buttons += '<a href="/shipping/delete/' + row.id + '/"class="btn btn-danger"><i class="fa fa-trash"></i></a>'+ '</div>';
-                        buttons += '<div class="row mt-2">'+'<a onclick="extraTable(\''+ row.status +'\' ' + ','+ '\''+ row.send_date +'\')" class="btn btn-success"><i class="fa fa-eye"></i></a>';
+                        var buttons = '<div class=row>'+'<a href="/shipping/' + row.id + '/"class="btn btn-warning mr-1"><i class="fa fa-pencil-square-o"></i></a>';
+                        buttons += '<a href="/shipping/delete/' + row.id + '/"class="btn btn-danger"><i class="fa fa-trash-o"></i></a>'+ '</div>';
+                        buttons += '<div class="row mt-2"><i></i></a>';
                         buttons += '<a href="/create/pdf/' + row.id + '/"class="btn btn-primary ml-1"><i class="fa fa-print"></i></a>'+'</div>';
 
                         return buttons;
