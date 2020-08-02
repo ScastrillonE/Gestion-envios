@@ -62,6 +62,7 @@ function listarEnvios(){
             {"data":"c_phone"},
             {"data":"c_cel"},
             {"data":"s_company"},
+            {"data":"status"},
             {
                 data: 'Foto',
                 render: function(data,type,row){
@@ -72,10 +73,10 @@ function listarEnvios(){
             {
                 data: 'options',
                 render: function(data,type,row){
-                        var buttons = '<div class=row>'+'<a href="/shipping/' + row.id + '/"class="btn btn-warning mr-1"><i class="fas fa-edit"></i></a>';
-                        buttons += '<a href="/shipping/delete/' + row.id + '/"class="btn btn-danger"><i class="fas fa-trash"></i></a>'+ '</div>';
-                        buttons += '<div class="row mt-2">'+'<a onclick="extraTable(\''+ row.status +'\' ' + ','+ '\''+ row.send_date +'\')" class="btn btn-success"><i class="fas fa-eye"></i></a>';
-                        buttons += '<a href="/create/pdf/' + row.id + '/"class="btn btn-primary ml-1"><i class="fas fa-print"></i></a>'+'</div>';
+                        var buttons = '<div class=row>'+'<a href="/shipping/' + row.id + '/"class="btn btn-warning mr-1"><i class="fa fa-pencil-square-o"></i></a>';
+                        buttons += '<a href="/shipping/delete/' + row.id + '/"class="btn btn-danger"><i class="fa fa-trash"></i></a>'+ '</div>';
+                        buttons += '<div class="row mt-2">'+'<a onclick="extraTable(\''+ row.status +'\' ' + ','+ '\''+ row.send_date +'\')" class="btn btn-success"><i class="fa fa-eye"></i></a>';
+                        buttons += '<a href="/create/pdf/' + row.id + '/"class="btn btn-primary ml-1"><i class="fa fa-print"></i></a>'+'</div>';
 
                         return buttons;
                 },
