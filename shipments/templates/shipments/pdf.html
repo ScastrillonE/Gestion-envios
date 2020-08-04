@@ -110,15 +110,17 @@ table th {
     $objetivo = document.querySelector("#contenedor"),
     $logo = document.querySelector("#logo");
 
+
     $boton.addEventListener("click", () => {
       html2canvas($objetivo)
         .then(canvas => {
             var imgData = canvas.toDataURL('image/png');
             // console.log(imgData);
+
             var doc = new jsPDF('p', 'mm');
 
             doc.addImage(imgData, 'PNG', 0, 0, 310, 100);
-            
+
             doc.save('envio.pdf');
         });
     });

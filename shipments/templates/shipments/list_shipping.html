@@ -44,7 +44,7 @@
         <th data-field="c_phone">Telefono</th>
         <th data-field="c_cel">Celular</th>
         <th data-field="shipping_company">Empresa</th>
-        <th data-field="photo">Foto</th>
+<!--        <th data-field="photo">Foto</th>-->
         <th>Opciones</th>
     </tr>
     </thead>
@@ -200,13 +200,6 @@ $(document).ready(function(){
                     return row.s_company
                 }
             },{
-                field: 'photo',
-                title:'foto',
-                formatter: function (value, row, index) {
-                    return '<img src="'+row.photo+'"/>'
-                }
-            },
-            {
              field: 'Opciones',
              title:'Opciones',
              formatter: function (value, row, index) {
