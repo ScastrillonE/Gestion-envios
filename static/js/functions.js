@@ -39,59 +39,59 @@ function listarClientes(){
     });
 }
 
-function listarEnvios(){
-    $('#tableShipping').DataTable({
-        scrollX: true,
-        responsive: true,
-        autoWidth: false,
-        destroy: true,
-        deferRender: true,
-        ajax: {
-            url: window.location.pathname,
-            type: "GET",
-            dataType:"json",
-            dataSrc:"",
-        },
-        columns : [
-            {"data":"id"},
-            {"data":"consecutivo"},
-            {"data":"cust.name"},
-            {"data":"c_Tdocument"},
-            {"data":"c_document"},
-            {"data":"shipping_number"},
-            {"data":"c_address"},
-            {"data":"departamento.nombre"},
-            {"data":"municip.nombre"},
-            {"data":"c_phone"},
-            {"data":"c_cel"},
-            {"data":"s_company"},
-            {
-                data: 'Foto',
-                render: function(data,type,row){
-                    return '<img class="img-fluid img-thumbnail" src="'+row.photo+'"/>';
-                },
-            },
-
-            {
-                data: 'options',
-                render: function(data,type,row){
-                        console.log(row);
-                        var buttons = '<div class=row>'+'<a href="/shipping/' + row.id + '/"class="btn btn-warning mr-1"><i class="icon-pencil"></i></a>';
-                        buttons += '<a href="/shipping/delete/' + row.id + '/"class="btn btn-danger"><i class="icon-bin2"></i></a>'+ '</div>';
-                        buttons += '<div class="row mt-2">'+'<a onclick="extraTable(\''+ row.status +'\' ' + ','+ '\''+ row.send_date +'\')" class="btn btn-success"><i class=" icon-eye"></i></a>';
-                        buttons += '<a href="/create/pdf/' + row.id + '/"class="btn btn-primary ml-1"><i class="icon-printer"></i></a>'+'</div>';
-
-                        return buttons;
-                },
-
-            },
-        ],
-        initComplete: function(settings,json){
-
-        }
-
-    });
-}
+//function listarEnvios(){
+//    $('#tableShipping').DataTable({
+//        scrollX: true,
+//        responsive: true,
+//        autoWidth: false,
+//        destroy: true,
+//        deferRender: true,
+//        ajax: {
+//            url: window.location.pathname,
+//            type: "GET",
+//            dataType:"json",
+//            dataSrc:"",
+//        },
+//        columns : [
+//            {"data":"id"},
+//            {"data":"consecutivo"},
+//            {"data":"cust.name"},
+//            {"data":"c_Tdocument"},
+//            {"data":"c_document"},
+//            {"data":"shipping_number"},
+//            {"data":"c_address"},
+//            {"data":"departamento.nombre"},
+//            {"data":"municip.nombre"},
+//            {"data":"c_phone"},
+//            {"data":"c_cel"},
+//            {"data":"s_company"},
+//            {
+//                data: 'Foto',
+//                render: function(data,type,row){
+//                    return '<img class="img-fluid img-thumbnail" src="'+row.photo+'"/>';
+//                },
+//            },
+//
+//            {
+//                data: 'options',
+//                render: function(data,type,row){
+//                        console.log(row);
+//                        var buttons = '<div class=row>'+'<a href="/shipping/' + row.id + '/"class="btn btn-warning mr-1"><i class="icon-pencil"></i></a>';
+//                        buttons += '<a href="/shipping/delete/' + row.id + '/"class="btn btn-danger"><i class="icon-bin2"></i></a>'+ '</div>';
+//                        buttons += '<div class="row mt-2">'+'<a onclick="extraTable(\''+ row.status +'\' ' + ','+ '\''+ row.send_date +'\')" class="btn btn-success"><i class=" icon-eye"></i></a>';
+//                        buttons += '<a href="/create/pdf/' + row.id + '/"class="btn btn-primary ml-1"><i class="icon-printer"></i></a>'+'</div>';
+//
+//                        return buttons;
+//                },
+//
+//            },
+//        ],
+//        initComplete: function(settings,json){
+//
+//        }
+//
+//    });
+//}
 
 function extraTable(status, date) {
     $('#extraTable').modal('show');
@@ -223,6 +223,5 @@ function autocomplete_customer(){
 
 $(document).ready(function(){
     listarClientes();
-    listarEnvios();
 
 });

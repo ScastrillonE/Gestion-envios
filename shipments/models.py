@@ -15,7 +15,11 @@ STATUS = [
 def gen():
     consecutivo = uuid.uuid4()
     consecutivo = str(consecutivo)
-    return consecutivo[0:10]
+    consecutivo = consecutivo[0:10]
+    codigo = consecutivo.split('-')
+    codigo = codigo[0]+codigo[1]
+    codigo = str(codigo)
+    return codigo
 
 class ShippingCompany(BaseModel):
     name = models.CharField(verbose_name='Nombre de la empresa',max_length=300, unique=True)

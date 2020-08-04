@@ -127,6 +127,7 @@ def shipping(request, id_ship=None):
 
                 if form.is_valid():
                     form.save()
+                    data['success'] = 'Guardado correctamente'
                     try:
                         if estado_envio == 'Enviado':
                             send_email(name, email, number, shipping_company.name, send_date)
