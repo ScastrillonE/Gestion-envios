@@ -24,7 +24,7 @@ table th {
                 <svg id="barcode"></svg>
             </td>
             <td>
-                <img style="width:160px;" src="{% static 'img/logonk/logonk.png' %}"  alt="">
+                <img id="logo" style="width:160px;" src="{% static 'img/logonk/logonk.png' %}"  alt="">
 
             </td>
         </TR>
@@ -107,16 +107,18 @@ table th {
 <script>
     JsBarcode("#barcode", "{{shipping.consecutivo}}");
     const $boton = document.querySelector("#btnCapturar"),
-    $objetivo = document.querySelector("#contenedor");
+    $objetivo = document.querySelector("#contenedor"),
+    $logo = document.querySelector("#logo");
 
     $boton.addEventListener("click", () => {
       html2canvas($objetivo)
         .then(canvas => {
             var imgData = canvas.toDataURL('image/png');
-            // console.log(imgData);
+            console.log(imgData);
             var doc = new jsPDF('p', 'mm');
 
             doc.addImage(imgData, 'PNG', 0, 0, 310, 100);
+            doc.addImage(logo, 'PNG', 83,4);
             doc.save('envio.pdf');
         });
     });
