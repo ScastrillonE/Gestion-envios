@@ -118,7 +118,7 @@ table th {
             var doc = new jsPDF('p', 'mm');
 
             doc.addImage(imgData, 'PNG', 0, 0, 310, 100);
-            doc.addImage(logo, 'PNG', 83,4);
+            
             doc.save('envio.pdf');
         });
     });
