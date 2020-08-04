@@ -5,6 +5,7 @@ function listarClientes(){
         autoWidth: false,
         destroy: true,
         deferRender: true,
+        fixedHeader: true,
         ajax: {
             url: window.location.pathname,
             type: "GET",
