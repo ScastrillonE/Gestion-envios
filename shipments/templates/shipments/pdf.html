@@ -110,7 +110,7 @@ table th {
     $objetivo = document.querySelector("#contenedor");
 
     $boton.addEventListener("click", () => {
-      html2canvas($objetivo, {logging: true,letterRendering: 1,allowTaint: true,useCORS: true})
+      html2canvas($objetivo)
         .then(canvas => {
             var imgData = canvas.toDataURL('image/png');
             // console.log(imgData);
