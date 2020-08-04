@@ -155,17 +155,16 @@ LOGGING = {
 
 # Sentry
 # ------------------------------------------------------------------------------
-SENTRY_DSN = env("SENTRY_DSN")
-SENTRY_LOG_LEVEL = env.int("DJANGO_SENTRY_LOG_LEVEL", logging.INFO)
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
-sentry_logging = LoggingIntegration(
-    level=SENTRY_LOG_LEVEL,  # Capture info and above as breadcrumbs
-    event_level=logging.ERROR,  # Send errors as events
-)
 sentry_sdk.init(
-    dsn=SENTRY_DSN,
-    integrations=[sentry_logging, DjangoIntegration()],
-)
+    dsn="https://74092cfa60b94093a1e3cc2199be9bb3@o428007.ingest.sentry.io/5372890",
+    integrations=[DjangoIntegration()],
 
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True
+)
 # Your stuff...
 # ------------------------------------------------------------------------------
