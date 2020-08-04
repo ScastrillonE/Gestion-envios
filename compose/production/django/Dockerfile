@@ -12,8 +12,6 @@ RUN apk update \
   # CFFI dependencies
   && apk add libffi-dev py-cffi
 
-RUN sudo apt-get install wkhtmltopdf
-
 
 RUN addgroup -S django \
     && adduser -S -G django django
