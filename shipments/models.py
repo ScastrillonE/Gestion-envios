@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from django.forms import model_to_dict
 from customers.models import Customer
@@ -11,7 +12,10 @@ STATUS = [
     ('Enviado', 'Enviado'),
 
 ]
-
+def gen():
+    consecutivo = uuid.uuid4()
+    consecutivo = str(consecutivo)
+    return consecutivo[0:10]
 
 class ShippingCompany(BaseModel):
     name = models.CharField(verbose_name='Nombre de la empresa',max_length=300, unique=True)
@@ -21,6 +25,7 @@ class ShippingCompany(BaseModel):
 
 
 class Shipping(BaseModel):
+    consecutivo = models.CharField(max_length=11, default=gen())
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE,
                                  verbose_name='Cliente')
     c_Tdocument = models.CharField(max_length=18, verbose_name='Tipo Documento')
@@ -55,6 +60,7 @@ class Shipping(BaseModel):
 
     def toJson(self):
         item = model_to_dict(self)
+        item["consecutivo"] = self.consecutivo
         item['s_company'] = self.shipping_company.name
         item['cust'] = self.customer.toJson()
         item['departamento'] = self.c_department.toJson()

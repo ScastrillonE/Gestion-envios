@@ -52,6 +52,8 @@ function listarEnvios(){
             dataSrc:"",
         },
         columns : [
+            {"data":"id"},
+            {"data":"consecutivo"},
             {"data":"cust.name"},
             {"data":"c_Tdocument"},
             {"data":"c_document"},
@@ -72,6 +74,7 @@ function listarEnvios(){
             {
                 data: 'options',
                 render: function(data,type,row){
+                        console.log(row);
                         var buttons = '<div class=row>'+'<a href="/shipping/' + row.id + '/"class="btn btn-warning mr-1"><i class="icon-pencil"></i></a>';
                         buttons += '<a href="/shipping/delete/' + row.id + '/"class="btn btn-danger"><i class="icon-bin2"></i></a>'+ '</div>';
                         buttons += '<div class="row mt-2">'+'<a onclick="extraTable(\''+ row.status +'\' ' + ','+ '\''+ row.send_date +'\')" class="btn btn-success"><i class=" icon-eye"></i></a>';

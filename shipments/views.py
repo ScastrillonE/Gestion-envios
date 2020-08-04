@@ -9,15 +9,16 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, DeleteView, CreateView, \
     ListView, UpdateView
 
+
 from core.mixins import ValidateRequiredMixin
 from .models import Shipping, ShippingCompany
 from .forms import ShippingForm, ShippingCompanyForm
 from .utils import *
+
+
 from customers.models import Customer
 from company.models import CompanySettings
 
-
-# Create your views here.
 from departamentos.models import Municipio
 
 
@@ -112,7 +113,6 @@ def shipping(request, id_ship=None):
 
                 for i in Customer.objects.filter(id=id):
                     data.append(i.toJson())
-
 
             elif action == "create_shipping":
                 data = {}
@@ -220,42 +220,12 @@ class DeleteShipping(ValidateRequiredMixin, DeleteView):
 
 
 def create_pdf(request, pk):
+    template_name ='shipments/pdf.html'
     shipping = Shipping.objects.get(id=pk)
     company = CompanySettings.objects.get(id=1)
     data = {
         'shipping': shipping,
         'company': company,
     }
-    pdf = render_to_pdf('shipments/pdf.html', data)
-    return HttpResponse(pdf, content_type='application/pdf')
 
-# def create_pdf(request,pk):
-#      shipping = Shipping.objects.get(id=pk).toJson()
-#      company = CompanySettings.objects.get(id=1)
-#
-#      if request.method == 'GET':
-#          response = HttpResponse(content_type='application/pdf')
-#          response['Content-Disposition'] = 'attachment; {}'.format('filename="'+shipping['shipping_number']+'".pdf')
-#          doc = Canvas(response)
-#          story = []
-#          st = code93.Standard93(shipping['cust']['name'])
-#          story.append(st)
-#          f = Frame(10 * mm, 10 * mm, 190 * mm, 277 * mm, showBoundary=0)
-#          f.addFromList(story, c)
-#          doc.save()
-#          # doc.line(570, 800, 20, 800)
-#          # doc.setFont("Helvetica", 11)
-#          # doc.drawString(25, 770, "De:")
-#          # doc.setFont("Helvetica", 10)
-#          # doc.drawString(50, 770, "{}".format(company.name_company).upper())
-#          # doc.drawString(25, 755, "{}".format(company.address).upper())
-#          # doc.drawString(25, 740, "TEL: {}".format(company.phone_number))
-#          # doc.line(570, 732, 20, 732)
-#          # doc.setFont("Helvetica", 11)
-#          # doc.drawString(25, 710, "PARA:")
-#          # doc.setFont("Helvetica", 10)
-#          # doc.drawString(60, 710, "{}".format(shipping['cust']['name']).upper())
-#          # doc.drawString(25, 690, "{}".format(shipping['c_address']).upper())
-#          # doc.line(570, 670, 20, 670)
-#          # doc.save()
-#          return response
+    return render(request,template_name,data)
