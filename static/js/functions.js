@@ -26,8 +26,8 @@ function listarClientes(){
             {
                 data: 'options',
                 render: function(data,type,row){
-                        var buttons = '<a href="/customer/update/' + row.id + '/"class="btn btn-warning mr-1"><i class="icon-pencil"></i></a>';
-                        buttons += '<a href="/customer/delete/' + row.id + '/"class="btn btn-danger"><i class="icon-bin2"></i></a>';
+                        var buttons = '<a href="/customer/update/' + row.id + '/"class="btn btn-warning mr-1"><i class="fa fa-pencil-square"></i></a>';
+                        buttons += '<a href="/customer/delete/' + row.id + '/"class="btn btn-danger"><i class="fa fa-trash-o"></i></a>';
                         return buttons;
                 },
             }
