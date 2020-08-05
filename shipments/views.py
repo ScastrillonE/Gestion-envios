@@ -1,3 +1,4 @@
+from os import remove
 from django.shortcuts import render, reverse
 from django.contrib.auth.decorators import login_required, \
     permission_required
@@ -200,7 +201,7 @@ class ListShipping(LoginRequiredMixin, ListView):
             data = []
             for i in Shipping.objects.all():
                 data.append(i.toJson())
-                print(data)
+                # print(data)
             return JsonResponse(data, safe=False)
         else:
             return render(request, self.template_name)
@@ -224,9 +225,11 @@ def create_pdf(request, pk):
     template_name ='shipments/pdf.html'
     shipping = Shipping.objects.get(id=pk)
     company = CompanySettings.objects.get(id=1)
+
+    codigo = generate_codebar(shipping.consecutivo)
     data = {
+        'code': codigo,
         'shipping': shipping,
         'company': company,
     }
-
-    return render(request,template_name,data)
+    return render_to_pdf(template_name, data)

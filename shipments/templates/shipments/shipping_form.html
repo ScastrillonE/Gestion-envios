@@ -210,11 +210,9 @@
                 {%if action != 'edit'%}
                  clearFields();
                 {%endif%}
-            }).fail(function(){
-                $.alert({
-                   title: 'Ocurrio un error al guardar',
-                   content: '',
-                });
+            }).fail(function (jqXHR, textStatus, errorThrown){
+                   alert(textStatus + ': ' + errorThrown);
+
             });
         });
         autocomplete_customer();

@@ -15,7 +15,8 @@ STATUS = [
 def gen():
     consecutivo = uuid.uuid4()
     consecutivo = str(consecutivo)
-    consecutivo = consecutivo[0:10]
+    consecutivo = consecutivo[0:13]
+    print(consecutivo)
     codigo = consecutivo.split('-')
     codigo = codigo[0]+codigo[1]
     codigo = str(codigo)
@@ -29,7 +30,7 @@ class ShippingCompany(BaseModel):
 
 
 class Shipping(BaseModel):
-    consecutivo = models.CharField(max_length=11, default=gen())
+    consecutivo = models.CharField(max_length=13, default=gen())
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE,
                                  verbose_name='Cliente')
     c_Tdocument = models.CharField(max_length=18, verbose_name='Tipo Documento')
