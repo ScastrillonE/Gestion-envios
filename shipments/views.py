@@ -118,6 +118,7 @@ def shipping(request, id_ship=None):
             elif action == "create_shipping":
                 data = {}
                 form = ShippingForm(request.POST)
+                print(form.errors)
                 estado_envio = request.POST['status']
                 name = get_name(request.POST['customer'])
                 email = request.POST['c_email']
@@ -161,7 +162,8 @@ def shipping(request, id_ship=None):
                         data['success'] = 'Guardado correctamente'
                     except Exception as e:
                         data['error'] = str(e)
-
+                else:
+                    data['error'] = 'Error al guardar {}'.format(form.errors)
             return JsonResponse(data, safe=False)
 
         # else:

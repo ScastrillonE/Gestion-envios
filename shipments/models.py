@@ -34,10 +34,10 @@ class Shipping(BaseModel):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE,
                                  verbose_name='Cliente')
     c_Tdocument = models.CharField(max_length=18, verbose_name='Tipo Documento')
-    c_document = models.IntegerField(verbose_name='Documento')
+    c_document = models.CharField(verbose_name='Documento',max_length=100,)
     c_address = models.CharField(max_length=150)
-    c_phone = models.IntegerField(verbose_name='Telefono', blank=True, null=True)
-    c_cel = models.IntegerField(verbose_name='Celular')
+    c_phone = models.CharField(verbose_name='Telefono', max_length=30, blank=True, null=True)
+    c_cel = models.CharField(verbose_name='Celular',max_length=30,)
     c_email = models.EmailField(max_length=100, verbose_name='Correo electronico')
     shipping_number = models.CharField(max_length=200, verbose_name='Numero guia',
                                        blank=True, null=True)

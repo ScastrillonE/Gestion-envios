@@ -189,13 +189,13 @@
         $("#btn-create").on("click",function(e) {
             e.preventDefault();
             var data = $("#form-shipping").serialize();
+            console.log(data);
             $.ajax({
                 url: window.location.pathname,
                 type: "POST",
                 dataType:"json",
                 data: data,
             }).done(function(data){
-                console.log(data);
                 if (!data.hasOwnProperty('error')) {
                     $.alert({
                         title: data['success'],
@@ -212,7 +212,6 @@
                 {%endif%}
             }).fail(function (jqXHR, textStatus, errorThrown){
                    alert(textStatus + ': ' + errorThrown);
-
             });
         });
         autocomplete_customer();
