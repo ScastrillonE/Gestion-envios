@@ -6,6 +6,15 @@
 
 {%endblock%}
 {% block content %}
+<style>
+    #options{
+         display:block;
+         padding:10px;
+         margin:10px;
+    }
+
+</style>
+
 <div class="card-body">
     <div class="col-md-12 row">
         <div class="col-md-4">
@@ -44,7 +53,7 @@
         <th data-field="c_phone">Telefono</th>
         <th data-field="c_cel">Celular</th>
         <th data-field="shipping_company">Empresa</th>
-<!--        <th data-field="photo">Foto</th>-->
+        <!--        <th data-field="photo">Foto</th>-->
         <th>Opciones</th>
     </tr>
     </thead>
@@ -88,7 +97,7 @@
 {%block extra_js%}
 <script src="{% static 'js/functions.js' %}"></script>
 <!--datetimepicker-->
-<script src="{% static 'lib/bootstrap-datetimepicker/js/bootstrap-datepicker.min.js' %}" ></script>
+<script src="{% static 'lib/bootstrap-datetimepicker/js/bootstrap-datepicker.min.js' %}"></script>
 <script>
 $(document).ready(function(){
     var $table = $('#tableShipping');
@@ -199,11 +208,23 @@ $(document).ready(function(){
                     return row.s_company
                 }
             },{
+                field: 'send_date',
+                title:'Fecha envio',
+                formatter: function (value, row, index) {
+                    return row.send_date
+                }
+            },{
+                field: 'status',
+                title:'Estado',
+                formatter: function (value, row, index) {
+                    return row.status
+                }
+            },{
              field: 'Opciones',
              title:'Opciones',
              formatter: function (value, row, index) {
-                        var buttons = '<div class=row>'+'<a href="/shipping/' + row.id + '/"class="btn btn-warning mr-1"><i class="fa fa-pencil-square"></i></a>';
-                        buttons += '<a href="/shipping/delete/' + row.id + '/"class="btn btn-danger"><i class="fa fa-trash-o"></i></a>'+ '</div>';
+                        var buttons = '<div class=row id=options>'+'<a href="/shipping/' + row.id + '/"class="btn btn-warning mr-1"><i class="fa fa-pencil-square"></i></a>';
+                        buttons += '<a href="/shipping/delete/' + row.id + '/"class="btn btn-danger"><i class="fa fa-trash-o"></i></a>';
                         buttons += '<a href="/create/pdf/' + row.id + '/"class="btn btn-primary ml-1"><i class="fa fa-print"></i></a>'+'</div>';
 
                         return buttons;
@@ -220,6 +241,7 @@ $(document).ready(function(){
 
 
 });
+
 
 
 </script>

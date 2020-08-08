@@ -2,14 +2,16 @@ from io import BytesIO
 from django.http import HttpResponse
 from django.template.loader import render_to_string, get_template
 from django.core.mail import EmailMessage
-
+from PIL import Image
 import os
+
 from barcode.writer import ImageWriter
 import barcode
 import base64
 import time
 
 from xhtml2pdf import pisa
+
 
 from customers.models import Customer
 from company.models import CompanySettings
@@ -40,20 +42,33 @@ def get_name(id):
     return id.name
 
 
+
 def render_to_pdf(template, data={}):
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename=filename.pdf'
     template = get_template(template)
     html = template.render(data)
     result = BytesIO()
     pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    response.write(result.getvalue())
     if not pdf.err:
-        return HttpResponse(result.getvalue(), content_type='application/pdf')
+        return response
     return None
+
+
+# def render_to_pdf(template, data={}):
+#     template = get_template(template)
+#     html = template.render(data)
+#     pdf = pdfkit.from_string(html, 'file.pdf')
+#     response = HttpResponse(pdf.read(),content_type='application/pdf')
+#     response['Content-Disposition'] = 'attachment; filename=filename.pdf'
+#
+#     return response
 
 
 def generate_codebar(consecutivo):
     code = barcode.get('code128', consecutivo, writer=ImageWriter())
-    filename = code.save('code128',{"module_width":0.35, "module_height":10, "font_size": 18, "text_distance": 1, "quiet_zone": 3})
-
+    filename = code.save('code128',{"module_width":0.70, "module_height":20, "font_size": 20, "text_distance": 1, "quiet_zone": 3})
     return filename
 
 
