@@ -14,25 +14,44 @@ TYPE_DOCUMENT = [
 ]
 
 
+def buscar_dep(dep):
+    try:
+        return Departamento.objects.get(nombre=dep)
+    except Exception as e:
+        print(str(e))
+        print(dep)
+        print("##########################")
+
+def buscar_mun(dep,mun):
+    try:
+        dep = Departamento.objects.get(nombre=dep)
+        m = Municipio.objects.get(departamento=dep,nombre=mun)
+        return m
+    except Exception as e :
+        print(str(e))
+        return print(f'departamento -- {dep} -- municipio -- {mun}')
+
 def guardar_customer():
     with open('/app/customers/clientes-stric.csv', newline='') as File:
         reader = csv.reader(File)
-        dep = Departamento.objects.get(nombre = 'Antioquia')
-        muni = Municipio.objects.get(nombre = 'Medellín')
-        for cus in reader:
-            customer = Customer.objects.get_or_create(
-                name=cus[0],
-                T_document='Cedula',
-                document=cus[1],
-                email='email@gmail.com',
-                address=cus[2],
-                phone= cus[3],
-                cel=123456,
-                department=dep,
-                municipio=muni,
+        for cus, doc, addr, dep, mun, tel in reader:
 
-            )
+            try:
+                customer = Customer.objects.get_or_create(
+                    name=cus,
+                    T_document='NIT',
+                    document=doc,
+                    email='email@gmail.com',
+                    address=addr,
+                    phone=tel,
+                    cel=123456,
+                    department=buscar_dep(dep),
+                    municipio=buscar_mun(dep,mun),
 
+                )
+                print(customer)
+            except Exception as e:
+                print(str(e))
 
 
 class Customer(BaseModel):
