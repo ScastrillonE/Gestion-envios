@@ -32,7 +32,7 @@ def buscar_mun(dep,mun):
         return print(f'departamento -- {dep} -- municipio -- {mun}')
 
 def guardar_customer():
-    with open('/app/customers/clientes-stric.csv', newline='') as File:
+    with open('/app/customers/clientes2.csv', newline='') as File:
         reader = csv.reader(File)
         for cus, doc, addr, dep, mun, tel in reader:
 
