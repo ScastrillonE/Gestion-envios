@@ -32,7 +32,8 @@ def buscar_mun(dep,mun):
         return print(f'departamento -- {dep} -- municipio -- {mun}')
 
 def guardar_customer():
-    with open('/app/customers/clientes2.csv', newline='') as File:
+    contador = 0
+    with open('/app/customers/clientes-stric.csv', newline='') as File:
         reader = csv.reader(File)
         for cus, doc, addr, dep, mun, tel in reader:
 
@@ -49,8 +50,11 @@ def guardar_customer():
                     municipio=buscar_mun(dep,mun),
 
                 )
+                print('Guardado')
                 print(customer)
             except Exception as e:
+                contador += 1
+                print(f'cliente numero {contador}')
                 print(str(e))
 
 
