@@ -169,6 +169,9 @@ function takePhoto(){
   var im64 = document.getElementById('id_photo');
   var previewimg = document.getElementById('preview');
 
+  var width = 320,
+      height = 0;
+
   var handleSuccess = function(stream) {
     // Attach the video stream to the video element and autoplay.
     player.srcObject = stream;
@@ -176,11 +179,14 @@ function takePhoto(){
 
   captureButton.addEventListener('click', function() {
     var context = snapshot.getContext('2d');
+
     // Draw the video frame to the canvas.
     context.drawImage(player, 0, 0, snapshotCanvas.width,
         snapshotCanvas.height);
-    im64.value= snapshot.toDataURL('image/png');
-    previewimg.src = snapshot.toDataURL('image/png');
+    var data = snapshot.toDataURL('image/png');
+    im64.value= data;
+    previewimg.src = data;
+
   });
 
 
