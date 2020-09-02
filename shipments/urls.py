@@ -1,7 +1,7 @@
 from django.urls import path
 
 from .views import (shipping, ListShipping, ShippingCompanyView,
-DeleteShipping, ShippingCompanyDelete,ShippingCompanyList,ShipppingCompanyEdit,
+deleteShipping, ShippingCompanyDelete,ShippingCompanyList,ShipppingCompanyEdit,
                     create_pdf)
 from .reportes import reportes
 
@@ -9,7 +9,7 @@ urlpatterns = [
     path('shipping/list', ListShipping.as_view(), name="list_shipping"),
     path('shipping/<int:id_ship>/', shipping, name="edit_shipping"),
     path('shipping/create/', shipping, name="create_shipping"),
-    path('shipping/delete/<int:pk>/',DeleteShipping.as_view()),
+    path('shipping/delete/<int:pk>/',deleteShipping, name='delete_shipping'),
     # path ShippingCompany
     path('shipping/company/create/', ShippingCompanyView.as_view(),
          name='company_create'),

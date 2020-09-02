@@ -42,7 +42,7 @@ class Shipping(BaseModel):
     shipping_number = models.CharField(max_length=200, verbose_name='Numero guia',
                                        blank=True, null=True)
     shipping_company = models.ForeignKey(ShippingCompany, on_delete=models.CASCADE)
-    photo = models.CharField(max_length=1048576, blank=True, null=True)
+    photo = models.TextField(blank=True, null=True)
     weight = models.CharField(max_length=500,blank=True,null=True,verbose_name='Peso')
     send_date = models.DateField(blank=True, null=True)
     status = models.CharField(choices=STATUS, default='Bodega',

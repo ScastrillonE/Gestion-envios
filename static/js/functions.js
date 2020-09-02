@@ -161,6 +161,7 @@ function extraTable(status, date) {
 //
 //}
 
+
 function takePhoto(){
   var player = document.getElementById('player');
   var snapshotCanvas = document.getElementById('snapshot');
@@ -226,6 +227,13 @@ function autocomplete_customer(){
     });
 }
 
+function confirmacion(id){
+    url = `/shipping/delete/${id}/`;
+    var opcion = confirm("Esta seguro de eliminar este envio?");
+        if (opcion == true) {
+            location.href= url;
+	    }
+}
 
 $(document).ready(function(){
     listarClientes();

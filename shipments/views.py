@@ -201,26 +201,29 @@ class ListShipping(LoginRequiredMixin, ListView):
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
             data = []
-            for i in Shipping.objects.all():
+            for i in Shipping.objects.filter(delete=False):
                 data.append(i.toJson())
                 # print(data)
             return JsonResponse(data, safe=False)
         else:
             return render(request, self.template_name)
 
+def deleteShipping(request,pk):
+    model = Shipping.objects.filter(pk=pk)[0]
+    model.delete = True
+    model.save()
+    return HttpResponseRedirect(reverse_lazy('list_shipping'))
 
-class DeleteShipping(ValidateRequiredMixin, DeleteView):
-    permission_required = 'shipments.delete_shipping'
-    model = Shipping
-    template_name = 'shipments/delete.html'
-    context_object_name = 'obj'
-    url_redirect = reverse_lazy('list_shipping')
 
-    def delete(self, request, *args, **kwargs):
-        self.object = self.model.objects.get(id=self.kwargs['pk'])
-        self.object.delete = True
-        success_url = self.get_success_url()
-        return HttpResponseRedirect(success_url)
+# class DeleteShipping(ValidateRequiredMixin, DeleteView):
+#     permission_required = 'shipments.delete_shipping'
+#     model = Shipping
+#     template_name = 'shipments/delete.html'
+#     context_object_name = 'obj'
+#     success_url = reverse_lazy('list_shipping')
+#     url_redirect = reverse_lazy('list_shipping')
+
+
 
 
 def create_pdf(request, pk):
