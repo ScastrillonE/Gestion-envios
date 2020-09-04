@@ -1,5 +1,8 @@
 {% extends 'core/base/base.html' %}
 {%load static%}
+{%block extra_css %}
+<link rel="stylesheet" href="{% static 'lib/data-table/css/datatables.min.css' %}">
+{%endblock%}
 {% block content %}
 <table id="dataTable" class="table">
     <a href="{% url 'create_customer' %}" class="btn btn-success mb-3"><i class="fa fa-plus" ></i> Añadir cliente</a>
@@ -23,6 +26,7 @@
 {%endblock%}
 
 {%block extra_js%}
+<script src="{% static 'lib/data-table/js/datatables.min.js' %}"></script>
 <script src="{% static 'js/functions.js' %}"></script>
 
 {%endblock%}

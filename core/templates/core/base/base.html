@@ -22,13 +22,8 @@
     <link rel="stylesheet" href="{% static 'lib/icomoon/style.css' %}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <!--    Data tables-->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.css"/>
-    <link rel="stylesheet" href="{% static 'lib/datatables-fixedheader/css/fixedHeader.bootstrap4.css' %}">
     <!--    Jquery Confirm-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-<!--    Bootstrap table-->
-    <link href="https://unpkg.com/bootstrap-table@1.17.1/dist/bootstrap-table.min.css" rel="stylesheet">
 
     {%block extra_css %}
     {%endblock%}
@@ -42,7 +37,7 @@
         <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fa fa-list"></i></a>
+                <a id="push" class="nav-link " data-widget="pushmenu" href="#" role="button"><i class="fa fa-list"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="{% url 'index' %}" class="nav-link">Dashboard</a>
@@ -186,7 +181,7 @@
                     </li>
 
                     <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
+                        <a href="#" class="nav-link link-push">
                             <i class="fa fa-user"></i>
                             <p>
                                 Clientes
@@ -210,7 +205,7 @@
                         </ul>
                     </li>
                     <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
+                        <a href="#" class="nav-link link-push">
                             <i class="fa fa-truck"></i>
                             <p>
                                 Envios
@@ -322,24 +317,20 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="{% static 'lib/jquery/jquery.min.js' %} "></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"
+			  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+			  crossorigin="anonymous"></script>
+
 <!-- Bootstrap 4 -->
 <script src="{% static 'lib/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 <!-- AdminLTE App -->
 <script src="{% static 'js/adminlte.min.js' %}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{% static 'js/demo.js' %}"></script>
-<!--Data table-->
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.js"></script>
-<!--<script src="{% static  'lib/data-table/js/datatables.min.js' %}"></script>-->
-<!--bootstrap table-->
-<script src="https://unpkg.com/bootstrap-table@1.17.1/dist/bootstrap-table.min.js"></script>
-<script src="{% static  'lib/datatables-fixedheader/js/fixedHeader.bootstrap4.js' %}"></script>
-
 <!--Jquery Confirm-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <script>
-    $('.nav-link').click();
+    document.getElementById('push').click();
     {% if messages %}
         var html = '<p>';
         {% for message in messages %}

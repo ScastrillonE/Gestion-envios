@@ -4,5 +4,6 @@ USE_DOCKER=yes
 IPYTHONDIR=/app/.ipython
 ENVIRONMENT=local
 DJANGO_DEBUG=True
-
+DJANGO_EMAIL=santiagocastrillon.ep@gmail.com
+DJANGO_EMAIL_PASS=SC@strillonE*05
 

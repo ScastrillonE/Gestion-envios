@@ -52,6 +52,8 @@ class Shipping(BaseModel):
     observations = models.TextField(verbose_name='Observaciones',
                                     null=True,blank=True)
 
+    class Meta:
+        ordering =['id']
     @property
     def get_customer(self):
         return self.customer.name
