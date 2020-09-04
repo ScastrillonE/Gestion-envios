@@ -3,8 +3,11 @@
 {% block extra_css %}
 <!--datetimepicker-->
 <link rel="stylesheet" href="{% static 'lib/bootstrap-datetimepicker/css/bootstrap-datepicker.standalone.css'%} ">
+<!--DataTable-->
+<link href="https://unpkg.com/bootstrap-table@1.17.1/dist/bootstrap-table.min.css" rel="stylesheet">
 
 {%endblock%}
+
 {% block content %}
 <style>
     #options{
@@ -36,27 +39,63 @@
             envío</a>
     </div>
 </div>
-<table id="tableShipping" class="table" data-search="true"
-       data-pagination="true">
-
+<table id="example" data-search="true" data-pagination="true"
+data-show-fullscreen="true" data-show-export="true"
+data-data-type="text" data-cache="true" data-cookie-id-table="saveId">
     <thead>
-    <tr>
-        <th data-field="id">Id</th>
-        <th data-field="consecutivo">Consecutivo</th>
-        <th data-field="cust.name">Cliente</th>
-        <th data-field="c_Tdocument">T.Documento</th>
-        <th data-field="c_document">Documento</th>
-        <th data-field="shipping_number">N.Guia</th>
-        <th data-field="c_address">Direccion</th>
-        <th data-field="departamento.nombre">Departamento</th>
-        <th data-field="municip.nombre">Municipio</th>
-        <th data-field="c_phone">Telefono</th>
-        <th data-field="c_cel">Celular</th>
-        <th data-field="shipping_company">Empresa</th>
-        <!--        <th data-field="photo">Foto</th>-->
-        <th>Opciones</th>
-    </tr>
+        <tr>
+            <th id="id_table" data-field="id" data-sortable="true"
+                data-sort-name="id" data-sort-order="desc">Id</th>
+            <th>Consecutivo</th>
+            <th>Cliente</th>
+            <th>T.Documento</th>
+            <th>Documento</th>
+            <th>N.Guia</th>
+            <th>Direccion</th>
+            <th>Departamento</th>
+            <th>Municipio</th>
+            <th>Telefono</th>
+            <th>Celular</th>
+            <th>Empresa</th>
+            <th>F.envio</th>
+            <th>Estado</th>
+            <!--        <th data-field="photo">Foto</th>-->
+            <th>Opciones</th>
+        </tr>
     </thead>
+    <tbody>
+        {%for envio in envios %}
+            <tr>
+                <td>{{envio.id}}</td>
+                <td>{{envio.consecutivo}}</td>
+                <td>{{envio.cust.name}}</td>
+                <td>{{envio.c_Tdocument}}</td>
+                <td>{{envio.c_document}}</td>
+                <td>{{envio.shipping_number}}</td>
+                <td>{{envio.c_address}}</td>
+                <td>{{envio.departamento.nombre}}</td>
+                <td>{{envio.municip.nombre}}</td>
+                <td>{{envio.c_phone}}</td>
+                <td>{{envio.c_cel}}</td>
+                <td>{{envio.s_company}}</td>
+                <td>{{envio.send_date}}</td>
+                <td>{{envio.status}}</td>
+                <td>
+                    <div class=row id=options>
+                        <a href="/shipping/{{envio.id}}/" class="btn btn-warning mr-1">
+                            <i class="fa fa-pencil-square"></i>
+                        </a>
+                        <a onclick="confirmacion({{envio.id}})" class="btn btn-danger">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
+                        <a href="/create/pdf/{{envio.id}}/" class="btn btn-primary ml-1">
+                            <i class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        {%endfor%}
+    </tbody>
 </table>
 
 <!--Modal for list extra data -->
@@ -98,10 +137,16 @@
 <script src="{% static 'js/functions.js' %}"></script>
 <!--datetimepicker-->
 <script src="{% static 'lib/bootstrap-datetimepicker/js/bootstrap-datepicker.min.js' %}"></script>
+<!--Datetable-->
+<script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.17.1/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.17.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.17.1/dist/extensions/cookie/bootstrap-table-cookie.min.js"></script>
+
 <script>
 $(document).ready(function(){
-
-    var $table = $('#tableShipping');
+    var $table = $('#example')
+    $table.bootstrapTable()
 
     $("#f1,#f2").datepicker({
         language: "es",
@@ -128,116 +173,6 @@ $(document).ready(function(){
         var url = "/reporte/"+ f1 + "/" + f2;
         window.open(url);
     });
-
-    $.ajax({
-       url: window.location.pathname,
-       type: "GET",
-       dataType:"json",
-    }).done(function(data){
-        $table.bootstrapTable({
-            data: data,
-            columns:[{
-                field: 'Id',
-                title:'Id',
-                formatter: function (value, row, index) {
-                    return row.id
-                }
-            },{
-                field: 'Consecutivo',
-                title:'Consecutivo',
-                formatter: function (value, row, index) {
-                    return row.consecutivo
-                }
-            },{
-                field: 'Cliente',
-                title:'Cliente',
-                formatter: function (value, row, index) {
-                    return row.cust.name
-                }
-            },{
-                field: 'T_document',
-                title:'T.Documento',
-                formatter: function (value, row, index) {
-                    return row.c_Tdocument
-                }
-            },{
-                field: 'c_document',
-                title:'Documento',
-                formatter: function (value, row, index) {
-                    return row.c_document
-                }
-            },{
-                field: 'n_guia',
-                title:'N.Guia',
-                formatter: function (value, row, index) {
-                    return row.shipping_number
-                }
-            },{
-                field: 'address',
-                title:'Direccion',
-                formatter: function (value, row, index) {
-                    return row.c_address
-                }
-            },{
-                field: 'department',
-                title:'Departamento',
-                formatter: function (value, row, index) {
-                    return row.departamento.nombre
-                }
-            },{
-                field: 'municipio',
-                title:'Municipio',
-                formatter: function (value, row, index) {
-                    return row.municip.nombre
-                }
-            },{
-                field: 'phone',
-                title:'Phone',
-                formatter: function (value, row, index) {
-                    return row.c_phone
-                }
-            },{
-                field: 'cel',
-                title:'Celular',
-                formatter: function (value, row, index) {
-                    return row.c_cel
-                }
-            },{
-                field: 'shipping_company',
-                title:'Empresa envio',
-                formatter: function (value, row, index) {
-                    return row.s_company
-                }
-            },{
-                field: 'send_date',
-                title:'Fecha envio',
-                formatter: function (value, row, index) {
-                    return row.send_date
-                }
-            },{
-                field: 'status',
-                title:'Estado',
-                formatter: function (value, row, index) {
-                    return row.status
-                }
-            },{
-             field: 'Opciones',
-             title:'Opciones',
-             formatter: function (value, row, index) {
-                        var buttons = '<div class=row id=options>'+'<a href="/shipping/' + row.id + '/"class="btn btn-warning mr-1"><i class="fa fa-pencil-square"></i></a>';
-                        buttons += '<a onclick="confirmacion('+ row.id +')" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>';
-                        buttons += '<a href="/create/pdf/' + row.id + '/"class="btn btn-primary ml-1"><i class="fa fa-print"></i></a>'+'</div>';
-
-                        return buttons;
-               }
-            }],
-        })
-
-    });
-
-
-
-
 
 
 

@@ -130,7 +130,7 @@ LOGOUT_REDIRECT_URL = 'login'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'correo@gmail.com'
-EMAIL_HOST_PASSWORD = '****'
+EMAIL_HOST_USER = os.environ.get('DJANGO_EMAIL')
+EMAIL_HOST_PASSWORD = os.environ.get('DJANGO_EMAIL_PASS')
 EMAIL_PORT = 587
 

@@ -137,6 +137,7 @@ def shipping(request, id_ship=None):
 
                         data['success'] = 'Guardado correctamente'
                     except Exception as e:
+                        print(e)
                         data['error'] = str(e)
 
 
@@ -161,6 +162,7 @@ def shipping(request, id_ship=None):
 
                         data['success'] = 'Guardado correctamente'
                     except Exception as e:
+                        print(e)
                         data['error'] = str(e)
                 else:
                     data['error'] = 'Error al guardar {}'.format(form.errors)
@@ -198,15 +200,23 @@ class ListShipping(LoginRequiredMixin, ListView):
     model = Shipping
     template_name = 'shipments/list_shipping.html'
 
-    def get(self, request, *args, **kwargs):
-        if request.is_ajax():
-            data = []
-            for i in Shipping.objects.filter(delete=False):
-                data.append(i.toJson())
-                # print(data)
-            return JsonResponse(data, safe=False)
-        else:
-            return render(request, self.template_name)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        data = []
+        for i in Shipping.objects.filter(delete=False):
+            data.append(i.toJson())
+        context['envios'] = data
+
+
+        return context
+
+
+    # def get(self, *args, **kwargs):
+    #     data = []
+    #     for i in Shipping.objects.filter(delete=False):
+    #         data.append(i.toJson())
+    #         # print(data)
+    #     return super(ListShipping, self).get(*args, **kwargs)
 
 def deleteShipping(request,pk):
     model = Shipping.objects.filter(pk=pk)[0]
